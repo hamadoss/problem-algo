@@ -1,0 +1,34 @@
+Algorithm dot_product(v1, v2)
+    ps = 0
+    for i = 1 to length of v1
+        ps = ps + v1[i] * v2[i]
+    end for
+    return ps
+End Algorithm
+
+Algorithm check_orthogonal_vectors(n)
+    vector_array = array of n vectors
+    for i = 1 to n
+        read the elements of the i-th vector and store them in vector_array[i]
+    end for
+    
+    orthogonal = true
+    for i = 1 to n
+        for j = i + 1 to n
+            ps = dot_product(vector_array[i], vector_array[j])
+            if ps != 0
+                orthogonal = false
+                break
+            end if
+        end for
+        if orthogonal = false
+            break
+        end if
+    end for
+    
+    if orthogonal = true
+        print "All vectors are orthogonal"
+    else
+        print "The vectors are not orthogonal"
+    end if
+End Algorithm
