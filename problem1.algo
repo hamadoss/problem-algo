@@ -1,31 +1,39 @@
-function findDistinctSum(set1, set2) {
-  let distinctElements = [];
-  let sum = 0;
+ALGORITHM ditinct_elements
+VAR
+  set1 : ARRAY_OF INTEGER [4];
+  set2 : ARRAY_OF INTEGER [5];
+  i,j :INTEGER;
+  sum : INTEGER :=0;
+  found: BOOLEAN;
+BEGIN
+  set1 := {3,1,7,9}
+  set2 := {2,4,1,9,3}
 
-  for (let i = 0; i < set1.length; i++) {
-    let element = set1[i];
-    if (!distinctElements.includes(element)) {
-      distinctElements.push(element);
-    }
-    if (set2.includes(element)) {
-      set2.splice(set2.indexOf(element), 1);
-    }
-  }
+  FOR i FROM 0 TO set1.length-1 STEP 1  DO
+    found := false;
+    FOR j FROM 0 TO set2.length-1 STEP 1  DO
+      IF (set1[i] = set2[j]) THEN
+        found = true
+        break
+      END_IF
+    END_FOR
+    IF (Not found) THEN
+      sum:= sum + set1[i]
+    END_IF
+  END_FOR
 
-  for (let i = 0; i < set2.length; i++) {
-    let element = set2[i];
-    if (!distinctElements.includes(element)) {
-      distinctElements.push(element);
-    }
-  }
-
-  for (let i = 0; i < distinctElements.length; i++) {
-    sum += distinctElements[i];
-  }
-
-  return sum;
-}
-
-let set1 = [3, 1, 7, 9];
-let set2 = [2, 4, 1, 9, 3];
-console.log(findDistinctSum(set1, set2)); // Output: 13
+  FOR i FROM 0 TO set2.length-1 STEP 1  DO
+    found := false;
+    FOR j FROM 0 TO set1.length-1 STEP 1  DO
+      IF (set2[i] = set1[j]) THEN
+        found = true
+        break
+      END_IF
+    END_FOR
+    IF (Not found) THEN
+      sum:= sum + set2[i]
+    END_IF
+  END_FOR
+   
+  write (sum)
+END
